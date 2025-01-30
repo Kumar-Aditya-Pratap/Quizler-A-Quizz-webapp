@@ -146,7 +146,7 @@
       };
 
       let currentSubject = "maths";
-      let currentQuestionIndex = 0;
+      let currentQuestionlogin = 0;
       let quizData = quizQuestions[currentSubject];
       let userAnswers = [];
       let timerValue = 20;
@@ -167,12 +167,12 @@
       }
 
       function loadQuestion() {
-        const question = quizData[currentQuestionIndex];
+        const question = quizData[currentQuestionlogin];
         document.getElementById("questionText").textContent = question.question;
         const optionsContainer = document.getElementById("optionsContainer");
         optionsContainer.innerHTML = "";
 
-        question.options.forEach((option, index) => {
+        question.options.forEach((option, login) => {
           const button = document.createElement("button");
           button.textContent = option;
           button.classList.add(
@@ -185,19 +185,19 @@
             "transition",
             "duration-300"
           );
-          button.addEventListener("click", () => selectAnswer(index));
+          button.addEventListener("click", () => selectAnswer(login));
           optionsContainer.appendChild(button);
         });
       }
 
-      function selectAnswer(selectedIndex) {
-        userAnswers[currentQuestionIndex] = selectedIndex;
+      function selectAnswer(selectedlogin) {
+        userAnswers[currentQuestionlogin] = selectedlogin;
         nextQuestion();
       }
 
       function nextQuestion() {
-        currentQuestionIndex++;
-        if (currentQuestionIndex < quizData.length) {
+        currentQuestionlogin++;
+        if (currentQuestionlogin < quizData.length) {
           loadQuestion();
         } else {
           alert("Quiz finished! Submitting answers...");
@@ -206,8 +206,8 @@
       }
 
       function prevQuestion() {
-        if (currentQuestionIndex > 0) {
-          currentQuestionIndex--;
+        if (currentQuestionlogin > 0) {
+          currentQuestionlogin--;
           loadQuestion();
         }
       }
@@ -216,8 +216,8 @@
       function showResults() {
         clearInterval(timerInterval); // Stop the timer when the quiz is submitted
         let score = 0;
-        quizData.forEach((question, index) => {
-          if (userAnswers[index] === question.answer) {
+        quizData.forEach((question, login) => {
+          if (userAnswers[login] === question.answer) {
             score++;
           }
         });
@@ -229,7 +229,7 @@
       document.getElementById("subject").addEventListener("change", (e) => {
         currentSubject = e.target.value;
         quizData = quizQuestions[currentSubject];
-        currentQuestionIndex = 0;
+        currentQuestionlogin = 0;
         loadQuestion();
       });
 

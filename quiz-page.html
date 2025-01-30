@@ -209,7 +209,7 @@
         document.getElementById("questionText").textContent = question.question;
         const optionsContainer = document.getElementById("optionsContainer");
         optionsContainer.innerHTML = "";
-        question.options.forEach((option, index) => {
+        question.options.forEach((option, login) => {
           const button = document.createElement("button");
           button.textContent = option;
           button.classList.add(
@@ -222,7 +222,7 @@
             "transition",
             "duration-300"
           );
-          button.addEventListener("click", () => selectAnswer(index));
+          button.addEventListener("click", () => selectAnswer(login));
           optionsContainer.appendChild(button);
         });
         startTimer();
@@ -266,9 +266,9 @@
         }
       });
 
-      function selectAnswer(selectedIndex) {
+      function selectAnswer(selectedlogin) {
         clearInterval(timer);
-        userAnswers[currentQuestion] = selectedIndex;
+        userAnswers[currentQuestion] = selectedlogin;
         nextQuestion();
       }
 
